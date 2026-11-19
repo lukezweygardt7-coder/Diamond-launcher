@@ -28,35 +28,29 @@ jobs:
           cd app_pojavlauncher/libs
           wget -q https://github.com/PojavLauncherTeam/LTW/releases/latest/download/ltw-release.aar
 
-      - name: Get JRE 8
-        uses: dawidd6/action-download-artifact@v9
-        with:
-          workflow: build.yml
-          path: app_pojavlauncher/src/main/assets/components/jre
-          workflow_conclusion: success
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre8
-          name: jre8-pojav
-
-      - name: Get JRE 17
-        uses: dawidd6/action-download-artifact@v9
-        with:
-          workflow: build.yml
-          path: app_pojavlauncher/src/main/assets/components/jre-new
-          workflow_conclusion: success
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre17-21
-          name: jre17-pojav
-
-      - name: Get JRE 21
-        uses: dawidd6/action-download-artifact@v9
-        with:
-          workflow: build.yml
-          path: app_pojavlauncher/src/main/assets/components/jre-21
-          workflow_conclusion: success
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre17-21
-          name: jre21-pojav
+      - name: Get Java runtimes from the official PojavLauncher release APK
+        id: jre
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/PojavLauncherTeam/PojavLauncher/releases?per_page=40" > releases.json
+          # First release APK big enough to contain the bundled runtimes.
+          jq -r '.[] | .tag_name as $t | .assets[] | select(.name|endswith(".apk")) | select(.size > 80000000)
+                 | [$t, .name, .size, .browser_download_url] | @tsv' releases.json | head -20
+          URL=$(jq -r '[.[] | .assets[] | select(.name|endswith(".apk")) | select(.size > 80000000)][0].browser_download_url' releases.json)
+          echo "Using: $URL"
+          test -n "$URL" -a "$URL" != "null"
+          curl -fsSL -o pojav-official.apk "$URL"
+          mkdir -p apkx
+          unzip -q pojav-official.apk 'assets/components/jre/*' 'assets/components/jre-new/*' 'assets/components/jre-21/*' -d apkx || true
+          D=app_pojavlauncher/src/main/assets/components
+          for n in jre jre-new jre-21; do
+            if [ -d "apkx/assets/components/$n" ]; then mv "apkx/assets/components/$n" "$D/$n"; echo "got $n"; else echo "MISSING $n"; fi
+          done
+          test -d "$D/jre" -a -d "$D/jre-new"
 
       - uses: gradle/actions/setup-gradle@v4
         with:
@@ -77,17 +71,18 @@ jobs:
       - name: Build APK
         run: |
           gradle :app_pojavlauncher:assembleDebug
-          mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/DiamondElantra.apk
+          if [ "${{ steps.jre.outcome }}" = "success" ]; then NAME=DiamondElantra.apk; else NAME=DiamondElantra-noruntime.apk; fi
+          mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk "out/$NAME"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: DiamondElantra-apk
-          path: out/DiamondElantra.apk
+          path: out/*.apk
 
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_number }}
           name: Diamond Elantra build ${{ github.run_number }}
-          files: out/DiamondElantra.apk
+          files: out/*.apk
