@@ -111,14 +111,20 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
      * Apply the background according to properties
      */
     default void setBackground() {
-        GradientDrawable gd = getControlView().getBackground() instanceof GradientDrawable
-                ? (GradientDrawable) getControlView().getBackground()
-                : new GradientDrawable();
-        gd.setColor(getProperties().bgColor);
-        gd.setStroke((int) Tools.dpToPx(getProperties().strokeWidth * (getControlLayoutParent().getLayoutScale()/100f)), getProperties().strokeColor);
-        gd.setCornerRadius(computeCornerRadius(getProperties().cornerRadius));
+        ControlData p = getProperties();
+        float minSize = Math.min(p.getWidth(), p.getHeight());
+        // Keep custom colours: the default (black) background becomes the stone gray.
+        int base = (p.bgColor & 0xFFFFFF) == 0 ? 0xFF8B8B8B : (0xFF000000 | p.bgColor);
+        float border = Math.max(Tools.dpToPx(1.5f), minSize * 0.04f);
+        float stroke = Tools.dpToPx(p.strokeWidth * (getControlLayoutParent().getLayoutScale() / 100f));
 
-        getControlView().setBackground(gd);
+        getControlView().setBackground(new McpeButtonDrawable(base, effectiveCornerRadius(), border, p.strokeColor, stroke));
+    }
+
+    /** Rounded corners for everyone: at least ~18% of the short side, or more if the layout asks for it. */
+    default float effectiveCornerRadius() {
+        float minSize = Math.min(getProperties().getWidth(), getProperties().getHeight());
+        return Math.max(computeCornerRadius(getProperties().cornerRadius), minSize * 0.18f);
     }
 
     /**

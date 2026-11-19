@@ -65,7 +65,7 @@ public class ControlButton extends TextView implements ControlInterface {
     public void setProperties(ControlData properties, boolean changePos) {
         mProperties = properties;
         ControlInterface.super.setProperties(properties, changePos);
-        mComputedRadius = ControlInterface.super.computeCornerRadius(mProperties.cornerRadius);
+        mComputedRadius = ControlInterface.super.effectiveCornerRadius();
 
         if (mProperties.isToggle) {
             //For the toggle layer
@@ -79,6 +79,10 @@ public class ControlButton extends TextView implements ControlInterface {
         }
 
         setText(properties.name);
+        // Old Pocket Edition label: white with a small dark drop shadow.
+        setTextColor(Color.WHITE);
+        float px = net.kdt.pojavlaunch.Tools.dpToPx(1f);
+        setShadowLayer(px * 1.5f, px, px, 0xFF3A3A3A);
     }
 
     @Override
