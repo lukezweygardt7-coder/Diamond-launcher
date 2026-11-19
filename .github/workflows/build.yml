@@ -68,6 +68,17 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Build demo.jar (Forge 1.20.1 demo-mode mod)
+        continue-on-error: true
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-8.8-bin.zip -O /tmp/gradle88.zip
+          unzip -q /tmp/gradle88.zip -d /tmp
+          cd demo-mod
+          /tmp/gradle-8.8/bin/gradle build --no-daemon
+          ls -la build/libs
+          mkdir -p ../app_pojavlauncher/src/main/assets/components/demo
+          cp build/libs/demo.jar ../app_pojavlauncher/src/main/assets/components/demo/demo.jar
+
       - name: Build APK
         run: |
           gradle :app_pojavlauncher:assembleDebug
@@ -85,4 +96,7 @@ jobs:
         with:
           tag_name: build-${{ github.run_number }}
           name: Diamond Elantra build ${{ github.run_number }}
-          files: out/*.apk
+          files: |
+            out/*.apk
+            demo-mod/build/libs/demo.jar
+          fail_on_unmatched_files: false

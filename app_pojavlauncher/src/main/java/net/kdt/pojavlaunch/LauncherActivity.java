@@ -47,6 +47,7 @@ import net.kdt.pojavlaunch.utils.DateUtils;
 import net.kdt.pojavlaunch.utils.NotificationUtils;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+import net.kdt.pojavlaunch.profiles.DemoJar;
 import net.kdt.pojavlaunch.profiles.ModdedOnly;
 
 import java.lang.ref.WeakReference;
@@ -159,6 +160,9 @@ public class LauncherActivity extends BaseActivity {
                 return false;
             }
         }
+
+        // Forge has no demo mode: demo accounts get demo.jar in the mods folder (removed again for real accounts).
+        DemoJar.sync(this, mAccountSpinner.getSelectedAccount().isDemo(), prof, normalizedVersionId);
 
         new MinecraftDownloader().start(
                 this,

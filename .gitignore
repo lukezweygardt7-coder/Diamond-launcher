@@ -10,3 +10,6 @@ app_pojavlauncher/.cxx/
 .vs/
 /curseforge_key.txt
 /app_pojavlauncher/libs/ltw-release.aar
+
+# built by CI
+app_pojavlauncher/src/main/assets/components/demo/
