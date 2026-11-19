@@ -37,7 +37,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:orientation="horizontal"
-		android:weightSum="3"
+		android:weightSum="4"
 		android:paddingHorizontal="@dimen/_14sdp"
 		android:paddingVertical="@dimen/_14sdp"
 		app:layout_constraintTop_toBottomOf="@id/diamond_header"
@@ -60,6 +60,15 @@
 			android:layout_weight="1"
 			android:layout_margin="@dimen/_4sdp"
 			android:text="@string/diamond_logs" />
+
+		<com.kdt.mcgui.LauncherMenuButton
+			android:id="@+id/bedrock_button"
+			style="@style/LauncherMenuButton"
+			android:layout_width="0dp"
+			android:layout_height="@dimen/_72sdp"
+			android:layout_weight="1"
+			android:layout_margin="@dimen/_4sdp"
+			android:text="@string/diamond_bedrock" />
 
 		<com.kdt.mcgui.LauncherMenuButton
 			android:id="@+id/open_files_button"

@@ -12,6 +12,9 @@ It is not affiliated with Mojang or Microsoft.
 - Windows 11 style dark theme with accent blue, Start-menu style tiles and a taskbar-style bottom bar.
 - Vanilla and modded instances both work. Accounts without Java Edition get Minecraft's free demo mode
   (the game still launches with `--demo`), including Forge/Fabric instances on Minecraft 1.3 and newer.
+- Local (offline) accounts count as demo accounts: the game launches with `--demo`, and demo accounts can download and run vanilla and Forge/Fabric 1.3+.
+- A **Bedrock** tile opens Mojang's free Minecraft Trial (or Bedrock if installed) on Android.
+- `demo-mod/` builds `demo.jar`, a Forge 1.20.1 mod that adds the demo limits; the launcher puts it in the mods folder for demo accounts.
 - A "modded only" switch exists in `ModdedOnly.java` (`ENFORCE`, off by default).
 - Wiki, Discord and Install .jar buttons were removed from the home screen.
 

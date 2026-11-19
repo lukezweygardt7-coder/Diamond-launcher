@@ -48,8 +48,9 @@ public class MinecraftAccount {
         return accessToken.equals("0") && !username.startsWith("Demo.");
     }
 
+    /** Diamond Elantra: local (offline) accounts count as demo accounts, so the game runs with --demo. */
     public boolean isDemo(){
-        return username.startsWith("Demo.");
+        return username.startsWith("Demo.") || isLocal();
     }
     
     public void updateSkinFace() {

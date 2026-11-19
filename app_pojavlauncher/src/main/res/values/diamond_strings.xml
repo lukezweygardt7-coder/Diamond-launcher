@@ -8,4 +8,7 @@
     <string name="diamond_subtitle" translatable="false">Minecraft, vanilla or modded.</string>
     <string name="diamond_demo_too_old" translatable="false">Demo mode only supports Minecraft 1.3 and newer.</string>
     <string name="diamond_modded_only" translatable="false">Vanilla instances are turned off. Create a Fabric, Forge, Quilt or modpack instance.</string>
+    <string name="diamond_bedrock" translatable="false">Bedrock</string>
+    <string name="diamond_bedrock_missing" translatable="false">Minecraft Bedrock is not installed. Opening the free Minecraft Trial on Google Play.</string>
+    <string name="diamond_need_account" translatable="false">Add an account first. A Local account gives you free demo mode.</string>
 </resources>

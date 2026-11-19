@@ -1436,6 +1436,7 @@ public final class Tools {
 
     public static boolean isLocalProfile(Context ctx){
         MinecraftAccount currentProfile = PojavProfile.getCurrentProfileContent(ctx, null);
-        return currentProfile == null || currentProfile.isLocal();
+        // Local accounts are demo accounts here, so only "no account at all" is blocked.
+        return currentProfile == null;
     }
 }
