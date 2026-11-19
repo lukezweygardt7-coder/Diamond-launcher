@@ -34,7 +34,7 @@ public class LauncherMenuButton extends ExtendedButton {
     private void setSettings(){
         Resources resources = getContext().getResources();
 
-        setBackgroundResource(R.drawable.win_tile_background);
+        setBackgroundResource(R.drawable.diamond_tile_background);
         setTextColor(0xFFFFFFFF);
         setAllCaps(false);
         setGravity(Gravity.BOTTOM | Gravity.START);

@@ -5,121 +5,149 @@
 	android:id="@+id/fragment_menu_main"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/background_app">
-
-	<!-- Windows-style home: header, Start-menu tiles, taskbar. -->
-	<LinearLayout
-		android:id="@+id/diamond_header"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:paddingHorizontal="@dimen/_20sdp"
-		android:paddingTop="@dimen/_14sdp"
-		app:layout_constraintTop_toTopOf="parent">
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/diamond_title"
-			android:textColor="@color/primary_text"
-			android:textSize="26sp"
-			android:textStyle="bold" />
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/diamond_subtitle"
-			android:textColor="@color/secondary_text"
-			android:textSize="14sp" />
-	</LinearLayout>
+	android:background="@drawable/diamond_bg_gradient">
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
+		android:layout_height="match_parent"
 		android:orientation="horizontal"
-		android:weightSum="4"
-		android:paddingHorizontal="@dimen/_14sdp"
-		android:paddingVertical="@dimen/_14sdp"
-		app:layout_constraintTop_toBottomOf="@id/diamond_header"
-		app:layout_constraintBottom_toTopOf="@id/diamond_taskbar">
+		android:padding="@dimen/_12sdp"
+		android:weightSum="2">
 
-		<com.kdt.mcgui.LauncherMenuButton
-			android:id="@+id/custom_control_button"
-			style="@style/LauncherMenuButton"
+		<!-- Hero card: who we are, which instance, PLAY. -->
+		<LinearLayout
 			android:layout_width="0dp"
-			android:layout_height="@dimen/_72sdp"
+			android:layout_height="match_parent"
 			android:layout_weight="1"
-			android:layout_margin="@dimen/_4sdp"
-			android:text="@string/diamond_controls" />
+			android:background="@drawable/diamond_hero_background"
+			android:orientation="vertical"
+			android:padding="@dimen/_14sdp">
 
-		<com.kdt.mcgui.LauncherMenuButton
-			android:id="@+id/share_logs_button"
-			style="@style/LauncherMenuButton"
+			<ImageView
+				android:layout_width="@dimen/_44sdp"
+				android:layout_height="@dimen/_44sdp"
+				android:src="@drawable/ic_pojav_full" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_6sdp"
+				android:text="@string/diamond_title"
+				android:textColor="@color/primary_text"
+				android:textSize="26sp"
+				android:textStyle="bold" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/diamond_subtitle"
+				android:textColor="@color/secondary_text"
+				android:textSize="14sp" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1" />
+
+			<com.kdt.mcgui.mcVersionSpinner
+				android:id="@+id/mc_version_spinner"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/_36sdp"
+				android:background="@drawable/win_input_background"
+				android:drawableEnd="@drawable/spinner_arrow"
+				app:drawableEndPadding="@dimen/_1sdp"
+				app:drawableEndSize="@dimen/_12sdp"
+				app:drawableStartIntegerScaling="true"
+				app:drawableStartSize="@dimen/_24sdp" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_8sdp"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+				<com.kdt.mcgui.MineButton
+					android:id="@+id/play_button"
+					android:layout_width="0dp"
+					android:layout_height="@dimen/_40sdp"
+					android:layout_weight="1"
+					android:text="@string/diamond_play"
+					android:textAllCaps="true" />
+
+				<ImageButton
+					android:id="@+id/edit_profile_button"
+					android:layout_width="@dimen/_40sdp"
+					android:layout_height="@dimen/_40sdp"
+					android:layout_marginStart="@dimen/_8sdp"
+					android:background="@drawable/win_input_background"
+					android:padding="@dimen/_9sdp"
+					android:scaleType="fitCenter"
+					android:src="@drawable/ic_edit_profile"
+					android:tint="@android:color/white" />
+			</LinearLayout>
+		</LinearLayout>
+
+		<!-- Tile grid. -->
+		<LinearLayout
 			android:layout_width="0dp"
-			android:layout_height="@dimen/_72sdp"
+			android:layout_height="match_parent"
+			android:layout_marginStart="@dimen/_12sdp"
 			android:layout_weight="1"
-			android:layout_margin="@dimen/_4sdp"
-			android:text="@string/diamond_logs" />
+			android:orientation="vertical"
+			android:weightSum="2">
 
-		<com.kdt.mcgui.LauncherMenuButton
-			android:id="@+id/bedrock_button"
-			style="@style/LauncherMenuButton"
-			android:layout_width="0dp"
-			android:layout_height="@dimen/_72sdp"
-			android:layout_weight="1"
-			android:layout_margin="@dimen/_4sdp"
-			android:text="@string/diamond_bedrock" />
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:orientation="horizontal"
+				android:weightSum="2">
 
-		<com.kdt.mcgui.LauncherMenuButton
-			android:id="@+id/open_files_button"
-			style="@style/LauncherMenuButton"
-			android:layout_width="0dp"
-			android:layout_height="@dimen/_72sdp"
-			android:layout_weight="1"
-			android:layout_margin="@dimen/_4sdp"
-			android:text="@string/diamond_folder" />
-	</LinearLayout>
+				<com.kdt.mcgui.LauncherMenuButton
+					android:id="@+id/custom_control_button"
+					style="@style/LauncherMenuButton"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_margin="@dimen/_4sdp"
+					android:layout_weight="1"
+					android:text="@string/diamond_controls" />
 
-	<!-- The "taskbar": profile picker on the left, PLAY on the right. -->
-	<LinearLayout
-		android:id="@+id/diamond_taskbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:gravity="center_vertical"
-		android:background="@color/background_bottom_bar"
-		android:padding="@dimen/_8sdp"
-		app:layout_constraintBottom_toBottomOf="parent">
+				<com.kdt.mcgui.LauncherMenuButton
+					android:id="@+id/share_logs_button"
+					style="@style/LauncherMenuButton"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_margin="@dimen/_4sdp"
+					android:layout_weight="1"
+					android:text="@string/diamond_logs" />
+			</LinearLayout>
 
-		<com.kdt.mcgui.mcVersionSpinner
-			android:id="@+id/mc_version_spinner"
-			android:layout_width="0dp"
-			android:layout_height="@dimen/_36sdp"
-			android:layout_weight="1"
-			android:background="@drawable/win_input_background"
-			android:drawableEnd="@drawable/spinner_arrow"
-			app:drawableEndPadding="@dimen/_1sdp"
-			app:drawableEndSize="@dimen/_12sdp"
-			app:drawableStartIntegerScaling="true"
-			app:drawableStartSize="@dimen/_24sdp" />
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:orientation="horizontal"
+				android:weightSum="2">
 
-		<ImageButton
-			android:id="@+id/edit_profile_button"
-			android:layout_width="@dimen/_36sdp"
-			android:layout_height="@dimen/_36sdp"
-			android:layout_marginStart="@dimen/_6sdp"
-			android:background="@drawable/win_input_background"
-			android:padding="@dimen/_8sdp"
-			android:scaleType="fitCenter"
-			android:tint="@android:color/white"
-			android:src="@drawable/ic_edit_profile" />
+				<com.kdt.mcgui.LauncherMenuButton
+					android:id="@+id/bedrock_button"
+					style="@style/LauncherMenuButton"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_margin="@dimen/_4sdp"
+					android:layout_weight="1"
+					android:text="@string/diamond_bedrock" />
 
-		<com.kdt.mcgui.MineButton
-			android:id="@+id/play_button"
-			android:layout_width="@dimen/_110sdp"
-			android:layout_height="@dimen/_36sdp"
-			android:layout_marginStart="@dimen/_8sdp"
-			android:text="@string/diamond_play"
-			android:textAllCaps="true" />
+				<com.kdt.mcgui.LauncherMenuButton
+					android:id="@+id/open_files_button"
+					style="@style/LauncherMenuButton"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_margin="@dimen/_4sdp"
+					android:layout_weight="1"
+					android:text="@string/diamond_folder" />
+			</LinearLayout>
+		</LinearLayout>
 	</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
