@@ -34,10 +34,13 @@ public class LauncherMenuButton extends ExtendedButton {
     private void setSettings(){
         Resources resources = getContext().getResources();
 
-        setBackgroundResource(R.drawable.diamond_button_background);
+        setBackgroundResource(R.drawable.win_tile_background);
         setTextColor(0xFFFFFFFF);
         setAllCaps(false);
-        setGravity(Gravity.CENTER);
+        setGravity(Gravity.BOTTOM | Gravity.START);
+        int pad = resources.getDimensionPixelSize(R.dimen._10sdp);
+        setPaddingRelative(pad, pad, pad, pad);
+        setTypeface(getTypeface(), android.graphics.Typeface.BOLD);
 
         setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen._12ssp));
 
