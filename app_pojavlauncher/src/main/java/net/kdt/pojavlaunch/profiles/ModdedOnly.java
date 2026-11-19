@@ -6,15 +6,19 @@ import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import java.util.Locale;
 
-/** Diamond Elantra only launches modded instances. This decides what counts as "modded". */
+/** Optional "modded instances only" rule. Flip ENFORCE to true to hide and block vanilla profiles. */
 public final class ModdedOnly {
     private ModdedOnly() {}
+
+    /** Off: vanilla and modded instances are both allowed. */
+    public static final boolean ENFORCE = false;
 
     private static final String[] LOADER_HINTS = {
             "fabric", "forge", "quilt", "optifine", "neoforge", "liteloader", "babric", "bta"
     };
 
     public static boolean isModdedProfile(MinecraftProfile profile) {
+        if (!ENFORCE) return profile != null;
         return profile != null && isModdedVersion(profile.lastVersionId);
     }
 

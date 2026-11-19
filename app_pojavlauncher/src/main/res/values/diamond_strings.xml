@@ -4,7 +4,8 @@
     <string name="diamond_controls" translatable="false">Controls</string>
     <string name="diamond_logs" translatable="false">Logs</string>
     <string name="diamond_folder" translatable="false">Folder</string>
-    <string name="diamond_modded_only" translatable="false">Diamond Elantra only launches modded instances. Open the profile list, tap Create new profile, and install Fabric, Forge, Quilt or a modpack.</string>
-    <string name="diamond_title" translatable="false">Diamond Elantra</string>
-    <string name="diamond_subtitle" translatable="false">Modded Minecraft, nothing else.</string>
+        <string name="diamond_title" translatable="false">Diamond Elantra</string>
+    <string name="diamond_subtitle" translatable="false">Minecraft, vanilla or modded.</string>
+    <string name="diamond_demo_too_old" translatable="false">Demo mode only supports Minecraft 1.3 and newer.</string>
+    <string name="diamond_modded_only" translatable="false">Vanilla instances are turned off. Create a Fabric, Forge, Quilt or modpack instance.</string>
 </resources>

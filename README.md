@@ -1,7 +1,6 @@
 # Diamond Elantra
 
-A Minecraft: Java Edition launcher for Android that **only launches modded instances**
-(Fabric, Forge, Quilt, OptiFine and modpacks), with a simplified blue home screen.
+A Minecraft: Java Edition launcher for Android with a Windows 11 style blue interface.
 
 Diamond Elantra is a fork of [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncher)
 by the PojavLauncher Team, licensed under the **GNU LGPL v3** (see `LICENSE`). Their copyright and
@@ -10,9 +9,11 @@ It is not affiliated with Mojang or Microsoft.
 
 ## What is different from PojavLauncher
 - Renamed to Diamond Elantra (app id `net.diamondelantra.launcher`).
-- Vanilla profiles are hidden and cannot be launched. The "Create new profile" screen has no vanilla option.
-- Home screen: three plain blue buttons (Controls, Logs, Folder), the profile picker and a big blue PLAY button.
-  Wiki, Discord and Install .jar buttons were removed. All other buttons use the same blue style.
+- Windows 11 style dark theme with accent blue, Start-menu style tiles and a taskbar-style bottom bar.
+- Vanilla and modded instances both work. Accounts without Java Edition get Minecraft's free demo mode
+  (the game still launches with `--demo`), including Forge/Fabric instances on Minecraft 1.3 and newer.
+- A "modded only" switch exists in `ModdedOnly.java` (`ENFORCE`, off by default).
+- Wiki, Discord and Install .jar buttons were removed from the home screen.
 
 ## Getting the APK
 Every push to `main` builds an APK with GitHub Actions. Open the **Releases** page and download

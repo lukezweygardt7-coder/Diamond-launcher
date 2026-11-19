@@ -112,7 +112,7 @@ public class LauncherActivity extends BaseActivity {
 
         String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
         if (LauncherProfiles.mainProfileJson == null || !LauncherProfiles.mainProfileJson.profiles.containsKey(selectedProfile)){
-            Toast.makeText(this, R.string.diamond_modded_only, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.error_no_version, Toast.LENGTH_LONG).show();
             return false;
         }
         MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
@@ -134,18 +134,28 @@ public class LauncherActivity extends BaseActivity {
         String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
         JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
 
-        // Do not load when is a modded version or older than minecraft 1.3 on demo account
+        // Demo mode only exists in Minecraft 1.3 and newer. Modded versions (Forge, Fabric...) are judged
+        // by the version they extend. The game is still launched with --demo.
         if (mAccountSpinner.getSelectedAccount().isDemo()) {
-            boolean isOlderThan13 = true;
-
-            if (mcVersion != null) {
+            JMinecraftVersionList.Version baseVersion = mcVersion;
+            if (baseVersion == null) {
                 try {
-                    isOlderThan13 = DateUtils.dateBefore(DateUtils.parseReleaseDate(mcVersion.releaseTime), 2012, 6, 22);
+                    JMinecraftVersionList.Version info = Tools.getVersionInfo(normalizedVersionId, true);
+                    if (info != null && info.inheritsFrom != null) {
+                        baseVersion = AsyncMinecraftDownloader.getListedVersion(info.inheritsFrom);
+                    }
+                } catch (Throwable ignored) {}
+            }
+
+            boolean isOlderThan13 = true;
+            if (baseVersion != null) {
+                try {
+                    isOlderThan13 = DateUtils.dateBefore(DateUtils.parseReleaseDate(baseVersion.releaseTime), 2012, 6, 22);
                 } catch (ParseException ignored) {}
             }
 
             if (isOlderThan13) {
-                Toast.makeText(this, R.string.toast_not_available_demo, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.diamond_demo_too_old, Toast.LENGTH_LONG).show();
                 return false;
             }
         }

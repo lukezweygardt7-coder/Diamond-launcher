@@ -430,5 +430,5 @@
     <string name="bta_installer_untested_versions">Untested BTA versions</string>
     <string name="bta_installer_nightly_versions">Nightly BTA versions</string>
     <string name="newdl_extracting_native_libraries">Extracting native libraries (%d/%d)</string>
-    <string name="toast_not_available_demo">Sign in with a Microsoft account that owns Minecraft: Java Edition to use this. Open the account list at the top and tap Add account.</string>
+    <string name="toast_not_available_demo">This needs a Microsoft account. Open the account list at the top and tap Add account. If the account does not own Java Edition you get free demo mode.</string>
 </resources>

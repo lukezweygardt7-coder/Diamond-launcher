@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import net.kdt.pojavlaunch.PojavProfile;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.profiles.ModdedOnly;
 
 public class ProfileTypeSelectFragment extends Fragment {
     public static final String TAG = "ProfileTypeSelectFragment";
@@ -21,10 +22,14 @@ public class ProfileTypeSelectFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Diamond Elantra: no vanilla profiles.
-        view.findViewById(R.id.title_textview).setVisibility(View.GONE);
-        view.findViewById(R.id.view).setVisibility(View.GONE);
-        view.findViewById(R.id.vanilla_profile).setVisibility(View.GONE);
+        if (ModdedOnly.ENFORCE) {
+            view.findViewById(R.id.title_textview).setVisibility(View.GONE);
+            view.findViewById(R.id.view).setVisibility(View.GONE);
+            view.findViewById(R.id.vanilla_profile).setVisibility(View.GONE);
+        } else {
+            view.findViewById(R.id.vanilla_profile).setOnClickListener(v -> Tools.swapFragment(requireActivity(),
+                    ProfileEditorFragment.class, ProfileEditorFragment.TAG, new Bundle(1)));
+        }
 
         // NOTE: Special care needed! If you wll decide to add these to the back stack, please read
         // the comment in FabricInstallFragment.onDownloadFinished() and amend the code
@@ -44,7 +49,7 @@ public class ProfileTypeSelectFragment extends Fragment {
     }
 
     private void tryInstall(Class<? extends Fragment> fragmentClass, String tag){
-        if(Tools.isLocalProfile(requireContext()) || Tools.isDemoProfile(requireContext())){
+        if(Tools.isLocalProfile(requireContext())){
             Toast.makeText(requireContext(), R.string.toast_not_available_demo, Toast.LENGTH_LONG).show();
         } else {
             Tools.swapFragment(requireActivity(), fragmentClass, tag, null);
