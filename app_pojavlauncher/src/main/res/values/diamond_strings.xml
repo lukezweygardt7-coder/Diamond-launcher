@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="diamond_play" translatable="false">PLAY</string>
+    <string name="diamond_controls" translatable="false">Controls</string>
+    <string name="diamond_logs" translatable="false">Logs</string>
+    <string name="diamond_folder" translatable="false">Folder</string>
+    <string name="diamond_modded_only" translatable="false">Diamond Elantra only launches modded instances. Open the profile list, tap Create new profile, and install Fabric, Forge, Quilt or a modpack.</string>
+</resources>
