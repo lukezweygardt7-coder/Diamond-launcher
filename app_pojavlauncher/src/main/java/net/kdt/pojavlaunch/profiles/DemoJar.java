@@ -32,36 +32,20 @@ public final class DemoJar {
             File target = new File(modsDir, "demo.jar");
             File fabricApi = new File(modsDir, "fabric-api.jar");
 
-            boolean forge = isForge1201(versionId);
-            boolean fabric = isFabric1201(versionId);
+            // Demo limits now come only from the game's own --demo mode (Tools.switchDemo). demo.jar is gone,
+            // so remove any copy left behind by older builds.
+            if (target.isFile()) {
+                //noinspection ResultOfMethodCallIgnored
+                target.delete();
+            }
 
             String retro = RetroProfiles.modeOf(profile);
-            File retroJar = new File(modsDir, "retro.jar");
-
-            if (retro != null && fabric) {
-                // Alpha / Beta instance: the retro-feel mod always, demo.jar and Fabric API as needed.
+            if (retro != null && isFabric1201(versionId)) {
+                // Alpha / Beta instance: the retro-feel mod, plus Fabric API which it needs.
                 if (!modsDir.isDirectory() && !modsDir.mkdirs()) return;
-                copyAsset(context, DIR + retro + ".jar", retroJar);
-                writeLowEndOptions(new File(modsDir.getParentFile(), "options.txt"));
+                copyAsset(context, DIR + retro + ".jar", new File(modsDir, "retro.jar"));
                 if (!hasFabricApi(modsDir)) copyAsset(context, DIR + "fabric-api.jar", fabricApi);
-                if (demoAccount) copyAsset(context, DIR + "demo-fabric.jar", target);
-                else if (target.isFile()) { //noinspection ResultOfMethodCallIgnored
-                    target.delete(); }
-            } else if (demoAccount && (forge || fabric)) {
-                if (!modsDir.isDirectory() && !modsDir.mkdirs()) return;
-                copyAsset(context, DIR + (forge ? "demo-forge.jar" : "demo-fabric.jar"), target);
-                if (fabric) {
-                    // Pojav's Fabric installer does not include Fabric API, which the Fabric demo mod needs.
-                    if (!hasFabricApi(modsDir)) copyAsset(context, DIR + "fabric-api.jar", fabricApi);
-                } else if (fabricApi.isFile()) {
-                    //noinspection ResultOfMethodCallIgnored
-                    fabricApi.delete();
-                }
-            } else {
-                if (target.isFile()) {
-                    //noinspection ResultOfMethodCallIgnored
-                    target.delete();
-                }
+                writeLowEndOptions(new File(modsDir.getParentFile(), "options.txt"));
             }
         } catch (Throwable t) {
             Log.w(TAG, "Could not sync demo.jar", t);
