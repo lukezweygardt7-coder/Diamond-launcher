@@ -40,7 +40,7 @@ public final class AccountBackup {
     }
 
     /**
-     * Bring accounts back from the visible folder: any account file there that the app does not have yet is
+     * Bring accounts back from the visible folder: any account file there that is new or was edited more recently than the app's own copy is
      * copied in. Covers a reinstall and moving to another Diamond Elantra.
      */
     public static void restoreMissing() {
@@ -51,7 +51,7 @@ public final class AccountBackup {
             if (!accounts.isDirectory() && !accounts.mkdirs()) return;
             for (File f : files) {
                 File target = new File(accounts, f.getName());
-                if (!target.exists()) copy(f, target);
+                if (!target.exists() || f.lastModified() > target.lastModified() + 2000) copy(f, target);
             }
             // Accounts that exist only inside the app (made before this backup existed) get a visible copy too.
             File[] own = accounts.listFiles((d, n) -> n.endsWith(".json"));
