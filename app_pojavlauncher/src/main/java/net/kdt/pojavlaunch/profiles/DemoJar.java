@@ -42,6 +42,7 @@ public final class DemoJar {
                 // Alpha / Beta instance: the retro-feel mod always, demo.jar and Fabric API as needed.
                 if (!modsDir.isDirectory() && !modsDir.mkdirs()) return;
                 copyAsset(context, DIR + retro + ".jar", retroJar);
+                writeLowEndOptions(new File(modsDir.getParentFile(), "options.txt"));
                 if (!hasFabricApi(modsDir)) copyAsset(context, DIR + "fabric-api.jar", fabricApi);
                 if (demoAccount) copyAsset(context, DIR + "demo-fabric.jar", target);
                 else if (target.isFile()) { //noinspection ResultOfMethodCallIgnored
@@ -64,6 +65,22 @@ public final class DemoJar {
             }
         } catch (Throwable t) {
             Log.w(TAG, "Could not sync demo.jar", t);
+        }
+    }
+
+    /**
+     * First launch of an Alpha/Beta instance on a weak phone or tablet: write light settings. Only done when
+     * the player has no options.txt yet, so anything they change later is kept.
+     */
+    private static void writeLowEndOptions(File options) {
+        if (options.exists()) return;
+        String text = "renderDistance:4\nsimulationDistance:5\ngraphicsMode:0\nrenderClouds:\"false\"\n"
+                + "ao:false\nparticles:2\nmaxFps:30\nentityShadows:false\nbiomeBlendRadius:0\n"
+                + "mipmapLevels:0\nentityDistanceScaling:0.5\nenableVsync:false\n";
+        try (OutputStream out = new FileOutputStream(options)) {
+            out.write(text.getBytes("UTF-8"));
+        } catch (Exception e) {
+            Log.w(TAG, "Could not write low-end options", e);
         }
     }
 
