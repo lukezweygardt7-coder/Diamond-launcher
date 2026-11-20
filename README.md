@@ -16,6 +16,7 @@ It is not affiliated with Mojang or Microsoft.
 - A **Bedrock** tile opens Mojang's free Minecraft Trial (or Bedrock if installed) on Android.
 - Demo accounts use the game's own `--demo` mode on every instance, including Forge and Fabric. There is no demo.jar any more.
 - `retro-mod/` builds `beta.jar` and `alpha.jar` (Fabric 1.20.1, no sprinting, no attack cooldown, old title). The Alpha and Beta home-screen buttons set up a hidden Fabric 1.20.1 instance with the retro jar with the `--demo` limits for demo accounts.
+- The **Boost** button installs FerriteCore, ModernFix, Lithium and Entity Culling (from Modrinth) on the selected Fabric 1.20.1 instance and lowers the render distance.
 - A "modded only" switch exists in `ModdedOnly.java` (`ENFORCE`, off by default).
 - Wiki, Discord and Install .jar buttons were removed from the home screen.
 

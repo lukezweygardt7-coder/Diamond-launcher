@@ -16,4 +16,5 @@
     <string name="diamond_retro_installing" translatable="false">Setting up %1$s Minecraft…</string>
     <string name="diamond_retro_ready" translatable="false">%1$s Minecraft is ready. Press Play.</string>
     <string name="diamond_retro_failed" translatable="false">Could not set up %1$s: check your internet connection.</string>
+    <string name="diamond_boost" translatable="false">Boost</string>
 </resources>

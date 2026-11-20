@@ -54,6 +54,8 @@ public class MainMenuFragment extends Fragment {
                 net.kdt.pojavlaunch.profiles.RetroProfiles.select(requireActivity(), "alpha"));
         view.findViewById(R.id.beta_button).setOnClickListener(v ->
                 net.kdt.pojavlaunch.profiles.RetroProfiles.select(requireActivity(), "beta"));
+        view.findViewById(R.id.boost_button).setOnClickListener(v ->
+                net.kdt.pojavlaunch.profiles.PerformanceBoost.run(requireActivity()));
         mCustomControlButton.setOnClickListener(v -> startActivity(new Intent(requireContext(), CustomControlsActivity.class)));
         mEditProfileButton.setOnClickListener(v -> mVersionSpinner.openProfileEditor(requireActivity()));
         mPlayButton.setOnClickListener(v -> ExtraCore.setValue(ExtraConstants.LAUNCH_GAME, true));
