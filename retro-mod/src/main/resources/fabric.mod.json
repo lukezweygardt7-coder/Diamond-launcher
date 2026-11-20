@@ -1,0 +1,20 @@
+{
+	"schemaVersion": 1,
+	"id": "retro_${mode}",
+	"version": "${version}",
+	"name": "Retro ${mode}",
+	"description": "Gives Minecraft the feel of the old ${mode} versions: no sprinting, no attack cooldown, old title.",
+	"authors": ["Diamond Elantra"],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["net.diamondelantra.retro.RetroMod"],
+		"client": ["net.diamondelantra.retro.RetroClient"]
+	},
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

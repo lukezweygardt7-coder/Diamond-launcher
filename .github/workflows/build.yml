@@ -93,6 +93,18 @@ jobs:
           cp build/libs/demo-fabric-1.0.0.jar ../demo-fabric.jar
           wget -q "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api/0.92.2%2B1.20.1/fabric-api-0.92.2%2B1.20.1.jar" -O ../app_pojavlauncher/src/main/assets/components/demo/fabric-api.jar
 
+      - name: Build beta.jar and alpha.jar (retro-feel Fabric mods)
+        continue-on-error: true
+        run: |
+          [ -d /tmp/gradle-8.10 ] || { wget -q https://services.gradle.org/distributions/gradle-8.10-bin.zip -O /tmp/gradle810.zip; unzip -q /tmp/gradle810.zip -d /tmp; }
+          mkdir -p app_pojavlauncher/src/main/assets/components/demo
+          cd retro-mod
+          for MODE in beta alpha; do
+            /tmp/gradle-8.10/bin/gradle clean build --no-daemon -Pretro_mode=$MODE
+            cp build/libs/retro-$MODE-1.0.0.jar ../app_pojavlauncher/src/main/assets/components/demo/$MODE.jar
+            cp build/libs/retro-$MODE-1.0.0.jar ../$MODE.jar
+          done
+
       - name: Build APK
         run: |
           gradle :app_pojavlauncher:assembleDebug
@@ -114,4 +126,6 @@ jobs:
             out/*.apk
             demo-forge.jar
             demo-fabric.jar
+            beta.jar
+            alpha.jar
           fail_on_unmatched_files: false

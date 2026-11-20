@@ -15,6 +15,7 @@ It is not affiliated with Mojang or Microsoft.
 - Local (offline) accounts count as demo accounts: the game launches with `--demo`, and demo accounts can download and run vanilla and Forge/Fabric 1.3+.
 - A **Bedrock** tile opens Mojang's free Minecraft Trial (or Bedrock if installed) on Android.
 - `demo-mod/` (Forge) and `demo-fabric/` (Fabric) build `demo.jar` for 1.20.1: strict demo limits (demo world only, ~20 min per session, no chat/commands on Forge, no multiplayer). The launcher puts the right one in the mods folder for demo accounts, plus Fabric API on Fabric. The vanilla `--demo` flag stays on too.
+- `retro-mod/` builds `beta.jar` and `alpha.jar` (Fabric 1.20.1, no sprinting, no attack cooldown, old title). The Alpha and Beta home-screen buttons set up a hidden Fabric 1.20.1 instance with the retro jar plus demo.jar and the `--demo` limits for demo accounts.
 - A "modded only" switch exists in `ModdedOnly.java` (`ENFORCE`, off by default).
 - Wiki, Discord and Install .jar buttons were removed from the home screen.
 

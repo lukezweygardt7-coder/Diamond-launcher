@@ -35,7 +35,18 @@ public final class DemoJar {
             boolean forge = isForge1201(versionId);
             boolean fabric = isFabric1201(versionId);
 
-            if (demoAccount && (forge || fabric)) {
+            String retro = RetroProfiles.modeOf(profile);
+            File retroJar = new File(modsDir, "retro.jar");
+
+            if (retro != null && fabric) {
+                // Alpha / Beta instance: the retro-feel mod always, demo.jar and Fabric API as needed.
+                if (!modsDir.isDirectory() && !modsDir.mkdirs()) return;
+                copyAsset(context, DIR + retro + ".jar", retroJar);
+                if (!hasFabricApi(modsDir)) copyAsset(context, DIR + "fabric-api.jar", fabricApi);
+                if (demoAccount) copyAsset(context, DIR + "demo-fabric.jar", target);
+                else if (target.isFile()) { //noinspection ResultOfMethodCallIgnored
+                    target.delete(); }
+            } else if (demoAccount && (forge || fabric)) {
                 if (!modsDir.isDirectory() && !modsDir.mkdirs()) return;
                 copyAsset(context, DIR + (forge ? "demo-forge.jar" : "demo-fabric.jar"), target);
                 if (fabric) {

@@ -11,4 +11,9 @@
     <string name="diamond_bedrock" translatable="false">Bedrock</string>
     <string name="diamond_bedrock_missing" translatable="false">Minecraft Bedrock is not installed. Opening the free Minecraft Trial on Google Play.</string>
     <string name="diamond_need_account" translatable="false">Add an account first. A Local account gives you free demo mode.</string>
+    <string name="diamond_alpha" translatable="false">Alpha</string>
+    <string name="diamond_beta" translatable="false">Beta</string>
+    <string name="diamond_retro_installing" translatable="false">Setting up %1$s Minecraft…</string>
+    <string name="diamond_retro_ready" translatable="false">%1$s Minecraft is ready. Press Play.</string>
+    <string name="diamond_retro_failed" translatable="false">Could not set up %1$s: check your internet connection.</string>
 </resources>
