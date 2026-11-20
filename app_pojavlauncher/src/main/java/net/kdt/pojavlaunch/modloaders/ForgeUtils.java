@@ -19,6 +19,10 @@ import javax.xml.parsers.SAXParserFactory;
 
 public class ForgeUtils {
     private static final String FORGE_METADATA_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml";
+    // Mirror used when maven.minecraftforge.net can't be reached from the device (old Android certificates,
+    // school/regional blocks, flaky routes).
+    private static final String FORGE_MIRROR_METADATA_URL = "https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/maven-metadata.xml";
+    private static final String FORGE_MIRROR_INSTALLER_URL = "https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/%1$s/forge-%1$s-installer.jar";
     private static final String FORGE_INSTALLER_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/%1$s/forge-%1$s-installer.jar";
     public static List<String> downloadForgeVersions() throws IOException {
         SAXParser saxParser;
@@ -31,8 +35,21 @@ public class ForgeUtils {
             return null;
         }
         try {
-            //of_test();
-            return DownloadUtils.downloadStringCached(FORGE_METADATA_URL, "forge_versions", input -> {
+            try {
+                return parseVersions(FORGE_METADATA_URL, saxParser);
+            } catch (IOException primaryFailure) {
+                primaryFailure.printStackTrace();
+                return parseVersions(FORGE_MIRROR_METADATA_URL, saxParser);
+            }
+        }catch (DownloadUtils.ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static List<String> parseVersions(String url, SAXParser saxParser) throws IOException, DownloadUtils.ParseException {
+        {
+            return DownloadUtils.downloadStringCached(url, "forge_versions", input -> {
                 try {
                     ForgeVersionListHandler handler = new ForgeVersionListHandler();
                     saxParser.parse(new InputSource(new StringReader(input)), handler);
@@ -43,12 +60,12 @@ public class ForgeUtils {
                     throw new DownloadUtils.ParseException(e);
                 }
             });
-        }catch (DownloadUtils.ParseException e) {
-            e.printStackTrace();
-            return null;
         }
-
     }
+    public static String getMirrorInstallerUrl(String version) {
+        return String.format(FORGE_MIRROR_INSTALLER_URL, version);
+    }
+
     public static String getInstallerUrl(String version) {
         return String.format(FORGE_INSTALLER_URL, version);
     }

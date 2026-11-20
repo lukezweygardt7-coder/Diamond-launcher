@@ -48,7 +48,14 @@ public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
         try {
             File destinationFile = new File(Tools.DIR_CACHE, "forge-installer.jar");
             byte[] buffer = new byte[8192];
-            DownloadUtils.downloadFileMonitored(mDownloadUrl, destinationFile, buffer, this);
+            try {
+                DownloadUtils.downloadFileMonitored(mDownloadUrl, destinationFile, buffer, this);
+            } catch (FileNotFoundException e) {
+                throw e;
+            } catch (IOException primaryFailure) {
+                // Forge's own server is unreachable: try the mirror before giving up.
+                DownloadUtils.downloadFileMonitored(ForgeUtils.getMirrorInstallerUrl(mFullVersion), destinationFile, buffer, this);
+            }
             mListener.onDownloadFinished(destinationFile);
         }catch (FileNotFoundException e) {
             mListener.onDataNotAvailable();
