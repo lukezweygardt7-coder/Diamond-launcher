@@ -63,7 +63,9 @@ public class MinecraftAccount {
     }
     
     public String save() throws IOException {
-        return save(Tools.DIR_ACCOUNT_NEW + "/" + username + ".json");
+        String name = save(Tools.DIR_ACCOUNT_NEW + "/" + username + ".json");
+        AccountBackup.mirror(username);
+        return name;
     }
     
     public static MinecraftAccount parse(String content) throws JsonSyntaxException {
