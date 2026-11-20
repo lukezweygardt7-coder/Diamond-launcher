@@ -4,20 +4,24 @@
     <color name="control_button_pressed_color">#4D000000</color>
 
     <!-- Windows 11 accent blue. (Name kept from Pojav: scrollbars, progress bars, login bar.) -->
-    <color name="minebutton_color">#0078D4</color>
-    <color name="background_app">#202020</color>
+    <color name="minebutton_color">#3B6CFF</color>
+    <color name="background_app">#0F0A24</color>
     <color name="divider">@color/background_overlay</color>
-    <color name="background_overlay">#3A3A3A</color>
-    <color name="background_status_bar">#1C1C1C</color>
-    <color name="background_bottom_bar">#1C1C1C</color>
+    <color name="background_overlay">#2B2058</color>
+    <color name="background_status_bar">#140C30</color>
+    <color name="background_bottom_bar">#140C30</color>
 
     <color name="primary_text">#FFFFFF</color>
     <color name="secondary_text">#C8C8C8</color>
 
-    <color name="diamond_blue">#0078D4</color>
-    <color name="diamond_blue_pressed">#106EBE</color>
-    <color name="diamond_blue_disabled">#3C3C3C</color>
-    <color name="diamond_accent_light">#60CDFF</color>
-    <color name="win_surface">#2D2D2D</color>
-    <color name="win_stroke">#3F3F3F</color>
+    <color name="diamond_blue">#3B6CFF</color>
+    <color name="diamond_blue_pressed">#2A55D6</color>
+    <color name="diamond_blue_disabled">#3A3556</color>
+    <color name="diamond_accent_light">#C4B5FD</color>
+    <color name="win_surface">#1D1540</color>
+    <color name="win_stroke">#4A3C8C</color>
+    <color name="diamond_purple">#8A3FFC</color>
+    <color name="diamond_purple_pressed">#6F2FD4</color>
+    <color name="diamond_bg_purple">#2A0F5C</color>
+    <color name="diamond_bg_blue">#0A1A55</color>
 </resources>

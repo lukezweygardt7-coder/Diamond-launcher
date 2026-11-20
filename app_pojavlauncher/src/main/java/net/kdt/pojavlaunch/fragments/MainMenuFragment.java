@@ -58,6 +58,8 @@ public class MainMenuFragment extends Fragment {
                 net.kdt.pojavlaunch.profiles.PerformanceBoost.run(requireActivity()));
         mCustomControlButton.setOnClickListener(v -> startActivity(new Intent(requireContext(), CustomControlsActivity.class)));
         mEditProfileButton.setOnClickListener(v -> mVersionSpinner.openProfileEditor(requireActivity()));
+        // Main-menu Play button wears the purple-to-blue gradient; MineButton buttons elsewhere stay solid blue.
+        mPlayButton.setBackgroundResource(R.drawable.diamond_play_background);
         mPlayButton.setOnClickListener(v -> ExtraCore.setValue(ExtraConstants.LAUNCH_GAME, true));
         mShareLogsButton.setOnClickListener((v) -> shareLog(requireContext()));
 

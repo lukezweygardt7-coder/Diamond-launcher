@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true"><shape android:shape="rectangle"><solid android:color="@color/diamond_blue_pressed" /><corners android:radius="20dp" /></shape></item>
-    <item><shape android:shape="rectangle"><solid android:color="@color/diamond_blue" /><corners android:radius="20dp" /></shape></item>
+    <item android:state_pressed="true"><shape android:shape="rectangle">
+        <gradient android:angle="315" android:startColor="@color/diamond_purple_pressed" android:endColor="@color/diamond_blue_pressed" android:type="linear" />
+        <corners android:radius="20dp" /></shape></item>
+    <item><shape android:shape="rectangle">
+        <gradient android:angle="315" android:startColor="@color/diamond_purple" android:endColor="@color/diamond_blue" android:type="linear" />
+        <corners android:radius="20dp" /></shape></item>
 </selector>
