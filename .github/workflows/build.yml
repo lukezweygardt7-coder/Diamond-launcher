@@ -77,7 +77,21 @@ jobs:
           /tmp/gradle-8.8/bin/gradle build --no-daemon
           ls -la build/libs
           mkdir -p ../app_pojavlauncher/src/main/assets/components/demo
-          cp build/libs/demo.jar ../app_pojavlauncher/src/main/assets/components/demo/demo.jar
+          cp build/libs/demo.jar ../app_pojavlauncher/src/main/assets/components/demo/demo-forge.jar
+          cp build/libs/demo.jar ../demo-forge.jar
+
+      - name: Build demo.jar (Fabric 1.20.1 demo-mode mod)
+        continue-on-error: true
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-8.10-bin.zip -O /tmp/gradle810.zip
+          unzip -q /tmp/gradle810.zip -d /tmp
+          cd demo-fabric
+          /tmp/gradle-8.10/bin/gradle build --no-daemon
+          ls -la build/libs
+          mkdir -p ../app_pojavlauncher/src/main/assets/components/demo
+          cp build/libs/demo-fabric-1.0.0.jar ../app_pojavlauncher/src/main/assets/components/demo/demo-fabric.jar
+          cp build/libs/demo-fabric-1.0.0.jar ../demo-fabric.jar
+          wget -q "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api/0.92.2%2B1.20.1/fabric-api-0.92.2%2B1.20.1.jar" -O ../app_pojavlauncher/src/main/assets/components/demo/fabric-api.jar
 
       - name: Build APK
         run: |
@@ -98,5 +112,6 @@ jobs:
           name: Diamond Elantra build ${{ github.run_number }}
           files: |
             out/*.apk
-            demo-mod/build/libs/demo.jar
+            demo-forge.jar
+            demo-fabric.jar
           fail_on_unmatched_files: false
