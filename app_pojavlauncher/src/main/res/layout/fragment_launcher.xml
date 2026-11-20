@@ -4,55 +4,141 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/fragment_menu_main"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:background="@drawable/diamond_bg_gradient">
+	android:layout_height="match_parent">
 
+	<!-- The animated space behind this screen comes from the activity. This layout is a title up top,
+	     open sky in the middle, then the tiles and a glass "dock" with the instance picker and PLAY. -->
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:orientation="horizontal"
-		android:padding="@dimen/_12sdp"
-		android:weightSum="2">
+		android:orientation="vertical"
+		android:padding="@dimen/_14sdp">
 
-		<!-- Hero card: who we are, which instance, PLAY. -->
 		<LinearLayout
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="@drawable/diamond_hero_background"
-			android:orientation="vertical"
-			android:padding="@dimen/_14sdp">
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
 
 			<ImageView
-				android:layout_width="@dimen/_44sdp"
-				android:layout_height="@dimen/_44sdp"
+				android:layout_width="@dimen/_40sdp"
+				android:layout_height="@dimen/_40sdp"
 				android:src="@drawable/ic_pojav_full" />
 
-			<TextView
+			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/_6sdp"
-				android:text="@string/diamond_title"
-				android:textColor="@color/primary_text"
-				android:textSize="26sp"
-				android:textStyle="bold" />
+				android:layout_marginStart="@dimen/_10sdp"
+				android:orientation="vertical">
 
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/diamond_subtitle"
-				android:textColor="@color/secondary_text"
-				android:textSize="14sp" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:letterSpacing="0.08"
+					android:shadowColor="#8A3FFC"
+					android:shadowRadius="18"
+					android:text="@string/diamond_title"
+					android:textAllCaps="true"
+					android:textColor="@color/primary_text"
+					android:textSize="26sp"
+					android:textStyle="bold" />
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				android:layout_weight="1" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/diamond_subtitle"
+					android:textColor="@color/diamond_accent_light"
+					android:textSize="13sp" />
+			</LinearLayout>
+		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/_54sdp"
+			android:orientation="horizontal"
+			android:weightSum="3">
+
+			<com.kdt.mcgui.LauncherMenuButton
+				android:id="@+id/custom_control_button"
+				style="@style/LauncherMenuButton"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_margin="@dimen/_4sdp"
+				android:layout_weight="1"
+				android:text="@string/diamond_controls" />
+
+			<com.kdt.mcgui.LauncherMenuButton
+				android:id="@+id/share_logs_button"
+				style="@style/LauncherMenuButton"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_margin="@dimen/_4sdp"
+				android:layout_weight="1"
+				android:text="@string/diamond_logs" />
+
+			<com.kdt.mcgui.LauncherMenuButton
+				android:id="@+id/open_files_button"
+				style="@style/LauncherMenuButton"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_margin="@dimen/_4sdp"
+				android:layout_weight="1"
+				android:text="@string/diamond_folder" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/_54sdp"
+			android:orientation="horizontal"
+			android:weightSum="3">
+
+			<com.kdt.mcgui.LauncherMenuButton
+				android:id="@+id/bedrock_button"
+				style="@style/LauncherMenuButton"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_margin="@dimen/_4sdp"
+				android:layout_weight="1"
+				android:text="@string/diamond_bedrock" />
+
+			<com.kdt.mcgui.LauncherMenuButton
+				android:id="@+id/alpha_button"
+				style="@style/LauncherMenuButton"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_margin="@dimen/_4sdp"
+				android:layout_weight="1"
+				android:text="@string/diamond_alpha" />
+
+			<com.kdt.mcgui.LauncherMenuButton
+				android:id="@+id/beta_button"
+				style="@style/LauncherMenuButton"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_margin="@dimen/_4sdp"
+				android:layout_weight="1"
+				android:text="@string/diamond_beta" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/_8sdp"
+			android:background="@drawable/diamond_glass_background"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:padding="@dimen/_8sdp">
 
 			<com.kdt.mcgui.mcVersionSpinner
 				android:id="@+id/mc_version_spinner"
-				android:layout_width="match_parent"
+				android:layout_width="0dp"
 				android:layout_height="@dimen/_36sdp"
+				android:layout_weight="1"
 				android:background="@drawable/win_input_background"
 				android:drawableEnd="@drawable/spinner_arrow"
 				app:drawableEndPadding="@dimen/_1sdp"
@@ -60,128 +146,24 @@
 				app:drawableStartIntegerScaling="true"
 				app:drawableStartSize="@dimen/_24sdp" />
 
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/_8sdp"
-				android:gravity="center_vertical"
-				android:orientation="horizontal">
+			<ImageButton
+				android:id="@+id/edit_profile_button"
+				android:layout_width="@dimen/_36sdp"
+				android:layout_height="@dimen/_36sdp"
+				android:layout_marginStart="@dimen/_8sdp"
+				android:background="@drawable/win_input_background"
+				android:padding="@dimen/_8sdp"
+				android:scaleType="fitCenter"
+				android:src="@drawable/ic_edit_profile"
+				android:tint="@android:color/white" />
 
-				<com.kdt.mcgui.MineButton
-					android:id="@+id/play_button"
-					android:layout_width="0dp"
-					android:layout_height="@dimen/_40sdp"
-					android:layout_weight="1"
-					android:text="@string/diamond_play"
-					android:textAllCaps="true" />
-
-				<ImageButton
-					android:id="@+id/edit_profile_button"
-					android:layout_width="@dimen/_40sdp"
-					android:layout_height="@dimen/_40sdp"
-					android:layout_marginStart="@dimen/_8sdp"
-					android:background="@drawable/win_input_background"
-					android:padding="@dimen/_9sdp"
-					android:scaleType="fitCenter"
-					android:src="@drawable/ic_edit_profile"
-					android:tint="@android:color/white" />
-			</LinearLayout>
-		</LinearLayout>
-
-		<!-- Tile grid. -->
-		<LinearLayout
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_marginStart="@dimen/_12sdp"
-			android:layout_weight="1"
-			android:orientation="vertical"
-			android:weightSum="3">
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				android:layout_weight="1"
-				android:orientation="horizontal"
-				android:weightSum="2">
-
-				<com.kdt.mcgui.LauncherMenuButton
-					android:id="@+id/custom_control_button"
-					style="@style/LauncherMenuButton"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_margin="@dimen/_4sdp"
-					android:layout_weight="1"
-					android:text="@string/diamond_controls" />
-
-				<com.kdt.mcgui.LauncherMenuButton
-					android:id="@+id/share_logs_button"
-					style="@style/LauncherMenuButton"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_margin="@dimen/_4sdp"
-					android:layout_weight="1"
-					android:text="@string/diamond_logs" />
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				android:layout_weight="1"
-				android:orientation="horizontal"
-				android:weightSum="2">
-
-				<com.kdt.mcgui.LauncherMenuButton
-					android:id="@+id/bedrock_button"
-					style="@style/LauncherMenuButton"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_margin="@dimen/_4sdp"
-					android:layout_weight="1"
-					android:text="@string/diamond_bedrock" />
-
-				<com.kdt.mcgui.LauncherMenuButton
-					android:id="@+id/open_files_button"
-					style="@style/LauncherMenuButton"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_margin="@dimen/_4sdp"
-					android:layout_weight="1"
-					android:text="@string/diamond_folder" />
-			</LinearLayout>
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				android:layout_weight="1"
-				android:orientation="horizontal"
-				android:weightSum="3">
-
-				<com.kdt.mcgui.LauncherMenuButton
-					android:id="@+id/alpha_button"
-					style="@style/LauncherMenuButton"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_margin="@dimen/_4sdp"
-					android:layout_weight="1"
-					android:text="@string/diamond_alpha" />
-
-				<com.kdt.mcgui.LauncherMenuButton
-					android:id="@+id/beta_button"
-					style="@style/LauncherMenuButton"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_margin="@dimen/_4sdp"
-					android:layout_weight="1"
-					android:text="@string/diamond_beta" />
-
-				<com.kdt.mcgui.LauncherMenuButton
-					android:id="@+id/boost_button"
-					style="@style/LauncherMenuButton"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_margin="@dimen/_4sdp"
-					android:layout_weight="1"
-					android:text="@string/diamond_boost" />
-			</LinearLayout>
+			<com.kdt.mcgui.MineButton
+				android:id="@+id/play_button"
+				android:layout_width="@dimen/_120sdp"
+				android:layout_height="@dimen/_36sdp"
+				android:layout_marginStart="@dimen/_8sdp"
+				android:text="@string/diamond_play"
+				android:textAllCaps="true" />
 		</LinearLayout>
 	</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

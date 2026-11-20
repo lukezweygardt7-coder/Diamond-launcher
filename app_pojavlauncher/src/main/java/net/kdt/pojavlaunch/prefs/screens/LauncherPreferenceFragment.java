@@ -23,8 +23,21 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        view.setBackgroundColor(getResources().getColor(R.color.background_app));
+        // Transparent page so the space shows through; the list itself sits in a rounded glass panel.
+        view.setBackgroundColor(android.graphics.Color.TRANSPARENT);
         super.onViewCreated(view, savedInstanceState);
+        int margin = (int) (16 * getResources().getDisplayMetrics().density);
+        androidx.recyclerview.widget.RecyclerView list = getListView();
+        if (list != null) {
+            list.setBackgroundResource(R.drawable.diamond_glass_background);
+            list.setClipToPadding(false);
+            list.setPadding(margin / 2, margin / 2, margin / 2, margin / 2);
+            android.view.ViewGroup.LayoutParams lp = list.getLayoutParams();
+            if (lp instanceof android.view.ViewGroup.MarginLayoutParams) {
+                ((android.view.ViewGroup.MarginLayoutParams) lp).setMargins(margin, margin / 2, margin, margin);
+                list.setLayoutParams(lp);
+            }
+        }
     }
 
     @Override

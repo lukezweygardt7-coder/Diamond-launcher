@@ -8,7 +8,7 @@
     <color name="background_app">#0F0A24</color>
     <color name="divider">@color/background_overlay</color>
     <color name="background_overlay">#2B2058</color>
-    <color name="background_status_bar">#140C30</color>
+    <color name="background_status_bar">#D9140C30</color>
     <color name="background_bottom_bar">#140C30</color>
 
     <color name="primary_text">#FFFFFF</color>
@@ -24,4 +24,8 @@
     <color name="diamond_purple_pressed">#6F2FD4</color>
     <color name="diamond_bg_purple">#2A0F5C</color>
     <color name="diamond_bg_blue">#0A1A55</color>
+    <color name="background_glass">#B30F0A24</color>
+    <color name="diamond_glass_fill">#99140C30</color>
+    <color name="diamond_glass_stroke">#66A78BFA</color>
+    <color name="diamond_accent_mix">#9B8CFF</color>
 </resources>
